@@ -9,7 +9,7 @@
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
 <body class="bg-gradient-to-br from-emerald-50 to-teal-100 min-h-screen py-6 px-4">
-    <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden border border-emerald-100">
+    <div class="max-w-7xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden border border-emerald-100">
         <!-- HEADER SEKOLAH -->
         <div class="bg-gradient-to-r from-emerald-700 to-teal-800 text-white p-5 text-center relative">
             <h1 class="text-xl md:text-2xl font-bold tracking-wide">SMP NEGERI 2 BELANG</h1>
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <!-- CONTAINER 1: FORMULIR SISWA -->
+        <!-- FORMULIR SISWA -->
         <div id="viewSiswa" class="p-6 md:p-8">
             <div class="mb-6 bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl">
                 <h2 class="font-semibold text-emerald-900 text-sm md:text-base">Petunjuk Pengisian:</h2>
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <!-- CONTAINER 2: DASHBOARD GURU -->
+        <!-- DASHBOARD GURU -->
         <div id="viewGuru" class="p-6 md:p-8 hidden space-y-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-teal-50 p-4 rounded-xl border border-teal-200">
                 <div>
@@ -104,26 +104,35 @@
                 </div>
             </div>
 
-            <!-- TABEL DAFTAR SISWA & RINCIAN JAWABAN SELURUH SOAL -->
+            <!-- TABEL DETAIL JAWABAN SISWA (SOAL 1 - 10) -->
             <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
                 <div class="px-4 py-3 bg-teal-50 border-b border-gray-200 font-semibold text-xs md:text-sm text-teal-900 flex justify-between items-center">
-                    <span>Daftar Siswa Responden & Rincian Jawaban (Soal 1 - 10)</span>
+                    <span>Tabel Rincian Jawaban Siswa per Butir Soal (1 s.d. 10)</span>
                     <span id="badgeTotalSiswa" class="text-xs bg-teal-200 text-teal-800 px-2 py-0.5 rounded-full font-bold">0 Siswa</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-xs">
                         <thead>
-                            <tr class="bg-gray-100 text-gray-600 text-[10px] uppercase border-b border-gray-200">
-                                <th class="p-3">No</th>
-                                <th class="p-3 min-w-[150px]">Nama Lengkap Siswa</th>
-                                <th class="p-3">Kelas</th>
-                                <th class="p-3 text-center min-w-[220px]">Rincian Skor Per Soal (S1 s.d S10)</th>
-                                <th class="p-3 text-center">Rata-rata Skor</th>
-                                <th class="p-3 min-w-[120px]">Waktu Pengisian</th>
+                            <tr class="bg-gray-100 text-gray-700 text-[10px] uppercase border-b border-gray-200 text-center">
+                                <th class="p-2.5 text-left">No</th>
+                                <th class="p-2.5 text-left min-w-[150px]">Nama Lengkap Siswa</th>
+                                <th class="p-2.5 text-left">Kelas</th>
+                                <th class="p-2.5">S1</th>
+                                <th class="p-2.5">S2</th>
+                                <th class="p-2.5">S3</th>
+                                <th class="p-2.5">S4</th>
+                                <th class="p-2.5">S5</th>
+                                <th class="p-2.5">S6</th>
+                                <th class="p-2.5">S7</th>
+                                <th class="p-2.5">S8</th>
+                                <th class="p-2.5">S9</th>
+                                <th class="p-2.5">S10</th>
+                                <th class="p-2.5 bg-teal-100 text-teal-900 font-bold">Rata2</th>
+                                <th class="p-2.5 text-left min-w-[110px]">Waktu</th>
                             </tr>
                         </thead>
-                        <tbody id="tabelRespondenBody" class="divide-y divide-gray-200 text-gray-700">
-                            <tr><td colspan="6" class="p-4 text-center text-gray-500">Klik tombol Muat untuk menampilkan data.</td></tr>
+                        <tbody id="tabelRespondenBody" class="divide-y divide-gray-200 text-gray-700 text-center">
+                            <tr><td colspan="15" class="p-4 text-center text-gray-500">Klik tombol Muat untuk menampilkan data.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -273,7 +282,7 @@
             const tabelRespondenBody = document.getElementById('tabelRespondenBody');
             
             tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500">Memuat data...</td></tr>`;
-            tabelRespondenBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500">Memuat data...</td></tr>`;
+            tabelRespondenBody.innerHTML = `<tr><td colspan="15" class="p-4 text-center text-gray-500">Memuat data...</td></tr>`;
 
             try {
                 const dbRef = ref(db, 'evaluasi_ipa');
@@ -281,7 +290,7 @@
 
                 if (!snapshot.exists()) {
                     tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500">Belum ada data evaluasi.</td></tr>`;
-                    tabelRespondenBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500">Belum ada siswa yang mengisi.</td></tr>`;
+                    tabelRespondenBody.innerHTML = `<tr><td colspan="15" class="p-4 text-center text-gray-500">Belum ada siswa yang mengisi.</td></tr>`;
                     document.getElementById('statTotalResponden').textContent = '0';
                     document.getElementById('statRataRata').textContent = '0.0';
                     document.getElementById('statGameScore').textContent = '0.0';
@@ -321,31 +330,28 @@
                         if (validRecord) {
                             totalResponden++;
                             
-                            // Format Badges Jawaban Soal 1 s.d. 10
-                            let rincianJawabanBadges = tempSoal.map((val, idx) => {
-                                let bgColor = "bg-gray-100 text-gray-700";
-                                if (val === 4) bgColor = "bg-emerald-100 text-emerald-800 font-bold";
-                                else if (val === 3) bgColor = "bg-teal-100 text-teal-800 font-bold";
-                                else if (val === 2) bgColor = "bg-yellow-100 text-yellow-800";
-                                else if (val === 1) bgColor = "bg-red-100 text-red-800";
-                                return `<span class="px-1.5 py-0.5 rounded text-[10px] ${bgColor}" title="Soal ${idx+1}: Skor ${val}">S${idx+1}:${val}</span>`;
-                            }).join(' ');
+                            // Render kolom per soal (S1 sampai S10)
+                            let kolSoalHtml = '';
+                            tempSoal.forEach(val => {
+                                let badgeColor = "bg-gray-100 text-gray-600";
+                                if (val === 4) badgeColor = "bg-emerald-100 text-emerald-800 font-bold";
+                                else if (val === 3) badgeColor = "bg-teal-100 text-teal-800 font-bold";
+                                else if (val === 2) badgeColor = "bg-yellow-100 text-yellow-800";
+                                else if (val === 1) badgeColor = "bg-red-100 text-red-800";
+                                kolSoalHtml += `<td class="p-2.5"><span class="px-2 py-0.5 rounded text-xs ${badgeColor}">${val || '-'}</span></td>`;
+                            });
 
                             let totalSkorSiswa = tempSoal.reduce((a, b) => a + b, 0);
                             let rataSkorSiswa = (totalSkorSiswa / 10).toFixed(2);
 
                             listRespondenHtml += `
                                 <tr class="hover:bg-gray-50">
-                                    <td class="p-3 font-medium">${nomorUrut++}</td>
-                                    <td class="p-3 font-semibold text-gray-800">${namaSiswa}</td>
-                                    <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs font-semibold">${kelasSiswa}</span></td>
-                                    <td class="p-3 text-center">
-                                        <div class="flex flex-wrap gap-1 justify-center">
-                                            ${rincianJawabanBadges}
-                                        </div>
-                                    </td>
-                                    <td class="p-3 text-center font-bold text-teal-700 bg-teal-50/50">${rataSkorSiswa}</td>
-                                    <td class="p-3 text-gray-500 text-xs">${waktuFormat}</td>
+                                    <td class="p-2.5 text-left font-medium">${nomorUrut++}</td>
+                                    <td class="p-2.5 text-left font-semibold text-gray-800">${namaSiswa}</td>
+                                    <td class="p-2.5 text-left"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs font-semibold">${kelasSiswa}</span></td>
+                                    ${kolSoalHtml}
+                                    <td class="p-2.5 font-bold text-teal-700 bg-teal-50/50">${rataSkorSiswa}</td>
+                                    <td class="p-2.5 text-left text-gray-500 text-xs">${waktuFormat}</td>
                                 </tr>
                             `;
 
@@ -362,7 +368,7 @@
 
                 if (totalResponden === 0) {
                     tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500">Tidak ada data rekap untuk kelas ${filterKelas}.</td></tr>`;
-                    tabelRespondenBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500">Tidak ada responden untuk kelas ini.</td></tr>`;
+                    tabelRespondenBody.innerHTML = `<tr><td colspan="15" class="p-4 text-center text-gray-500">Tidak ada responden untuk kelas ini.</td></tr>`;
                     document.getElementById('statTotalResponden').textContent = '0';
                     document.getElementById('statRataRata').textContent = '0.0';
                     document.getElementById('statGameScore').textContent = '0.0';
