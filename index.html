@@ -4,39 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluasi & Rekap Pembelajaran IPA - SMP Negeri 2 Belang</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
 <body class="bg-gradient-to-br from-emerald-50 to-teal-100 min-h-screen py-6 px-4">
-
     <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden border border-emerald-100">
-        
-        <!-- Header / Banner Sekolah -->
         <div class="bg-gradient-to-r from-emerald-700 to-teal-800 text-white p-5 text-center relative">
             <h1 class="text-xl md:text-2xl font-bold tracking-wide">SMP NEGERI 2 BELANG</h1>
             <p class="text-emerald-200 text-xs md:text-sm mt-1">Sistem Evaluasi & Analisis Pembelajaran IPA Berbasis Game</p>
             <div class="mt-3 text-xs bg-emerald-900/50 inline-block px-3 py-1 rounded-full border border-emerald-600/50">
                 Guru Mapel: <span class="font-semibold text-white">Nofri Yanto Tora</span> | Kasek: <span class="font-semibold text-white">Metty Astuti, S.Pd</span>
             </div>
-            
-            <!-- Tombol Navigasi Mode Siswa / Guru -->
             <div class="mt-4 flex justify-center gap-2">
                 <button onclick="switchView('siswa')" id="btnViewSiswa" class="bg-emerald-900 text-xs px-3 py-1.5 rounded-lg border border-emerald-600 font-medium transition">Form Siswa</button>
                 <button onclick="switchView('guru')" id="btnViewGuru" class="bg-teal-800/80 text-xs px-3 py-1.5 rounded-lg border border-teal-600 font-medium transition">Dashboard Guru</button>
             </div>
         </div>
 
-        <!-- CONTAINER 1: FORMULIR SISWA -->
         <div id="viewSiswa" class="p-6 md:p-8">
             <div class="mb-6 bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl">
                 <h2 class="font-semibold text-emerald-900 text-sm md:text-base">Petunjuk Pengisian:</h2>
                 <p class="text-xs md:text-sm text-emerald-700 mt-1">Jawablah pertanyaan berikut dengan jujur sesuai pengalaman belajar IPA Anda di kelas (Pilih kelas <strong>VIII B</strong> atau <strong>VIII C</strong>).</p>
             </div>
-
             <form id="evaluasiForm" class="space-y-6">
-                <!-- Identitas Siswa -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border border-gray-200">
                     <div>
                         <label class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Nama Lengkap Siswa</label>
@@ -51,20 +42,14 @@
                         </select>
                     </div>
                 </div>
-
                 <hr class="border-gray-200 my-4">
-
-                <!-- Daftar Pertanyaan -->
                 <div id="soalContainer" class="space-y-6"></div>
-
                 <div class="pt-4">
                     <button type="submit" id="submitBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-md text-sm md:text-base">
                         Kirim Evaluasi Pembelajaran
                     </button>
                 </div>
             </form>
-
-            <!-- Pesan Sukses -->
             <div id="successMessage" class="hidden text-center py-10 space-y-4">
                 <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
                 <h3 class="text-xl font-bold text-gray-800">Terima Kasih!</h3>
@@ -73,7 +58,6 @@
             </div>
         </div>
 
-        <!-- CONTAINER 2: DASHBOARD & REKAPITULASI GURU -->
         <div id="viewGuru" class="p-6 md:p-8 hidden space-y-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-teal-50 p-4 rounded-xl border border-teal-200">
                 <div>
@@ -89,8 +73,6 @@
                     <button onclick="loadRekapData()" class="bg-teal-700 text-white text-xs md:text-sm px-4 py-1.5 rounded-lg hover:bg-teal-800 transition">Muat</button>
                 </div>
             </div>
-
-            <!-- Ringkasan Statistik -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm text-center">
                     <p class="text-xs text-gray-500 uppercase font-semibold">Total Responden</p>
@@ -105,8 +87,6 @@
                     <h3 id="statGameScore" class="text-2xl font-bold text-blue-600 mt-1">0.0</h3>
                 </div>
             </div>
-
-            <!-- KOTAK ANALISIS DESKRIPTIF & REKOMENDASI PERBAIKAN -->
             <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 space-y-3">
                 <div class="flex items-center gap-2">
                     <span class="text-xl">📊</span>
@@ -116,8 +96,6 @@
                     <p class="italic text-gray-500">Memuat analisis data...</p>
                 </div>
             </div>
-
-            <!-- Tabel Detail Rekap per Aspek Pertanyaan -->
             <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
                 <div class="px-4 py-3 bg-gray-50 border-b border-gray-200 font-semibold text-xs md:text-sm text-gray-700">
                     Rata-rata Skor per Butir Pertanyaan
@@ -137,10 +115,8 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- SCRIPT PROGRAM UTAMA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getDatabase, ref, push, set, get } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
